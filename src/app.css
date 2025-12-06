@@ -1,0 +1,240 @@
+/* src/app.css */
+
+/* --- Variables & Theme --- */
+:root {
+  /* Salmon Theme Palette */
+  --theme-primary: #E55137;       /* The Salmon Color */
+  --theme-primary-dark: #c93e26;  /* Darker shade for hover */
+  --theme-text-main: #2c2c2c;     /* Dark grey for readable body text */
+  --theme-text-light: #ffffff;
+  
+  --pure-white: #ffffff;
+  --off-white: #fff5f3;           /* Very faint warm tint for background */
+  
+  --bubbly-radius: 20px;
+  --smooth-shadow: 0 10px 25px rgba(229, 81, 55, 0.15); /* Salmon tinted shadow */
+  --hover-shadow: 0 15px 35px rgba(229, 81, 55, 0.25);
+  --transition-speed: 0.3s ease;
+  
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bs-body-bg: var(--off-white);
+  --bs-body-color: var(--theme-text-main);
+  --bs-primary: var(--theme-primary); /* Override Bootstrap primary */
+}
+
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--bs-font-sans-serif);
+  overflow-x: hidden;
+}
+
+/* --- Global Utilities --- */
+a {
+  text-decoration: none;
+  transition: all var(--transition-speed);
+  color: var(--theme-primary);
+}
+
+a:hover {
+  color: var(--theme-primary-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* --- Bubbly Card Styling --- */
+.bubbly-card, .card {
+  background: var(--pure-white);
+  border: none;
+  border-radius: var(--bubbly-radius);
+  box-shadow: var(--smooth-shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* --- Navigation Styling --- */
+.navbar-custom {
+  background: linear-gradient(135deg, var(--theme-primary) 0%, #ff7e67 100%);
+  box-shadow: 0 4px 20px rgba(229, 81, 55, 0.3);
+  padding: 1rem 0;
+  border-bottom-left-radius: var(--bubbly-radius);
+  border-bottom-right-radius: var(--bubbly-radius);
+  margin-bottom: 2rem;
+}
+
+.navbar-brand-text {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--theme-text-light) !important;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand-logo {
+  height: 40px;
+  width: auto;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.4));
+  transition: transform 0.3s;
+}
+
+.navbar-brand-logo:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.nav-link-custom {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+
+.nav-link-custom:hover {
+  color: var(--theme-text-light) !important;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* --- Buy Me A Coffee Button --- */
+.bmac-container {
+  position: relative;
+  display: inline-block;
+}
+
+.bmac-button {
+  background: var(--pure-white); /* White button to pop against Salmon nav */
+  color: var(--theme-primary);   /* Salmon text */
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bmac-button svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--theme-primary);
+}
+
+.bmac-button:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background-color: #fffef0; /* Slight warm off-white on hover */
+}
+
+/* --- BMAC Dropdown --- */
+.bmac-dropdown {
+  position: absolute;
+  top: 140%;
+  left: 0;
+  background-color: var(--pure-white);
+  min-width: 120px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(229, 81, 55, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bmac-dropdown a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--theme-text-main);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.bmac-dropdown a:hover {
+  background-color: var(--off-white);
+  color: var(--theme-primary);
+  transform: scale(1.05);
+}
+
+/* --- Footer --- */
+.footer-custom {
+  background-color: var(--theme-primary);
+  color: var(--theme-text-light);
+  padding: 1.5rem 0;
+  border-top-left-radius: var(--bubbly-radius);
+  border-top-right-radius: var(--bubbly-radius);
+  margin-top: auto;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-link:hover {
+  color: var(--theme-text-light);
+  text-decoration: underline;
+}
+
+/* --- Form Elements --- */
+input[type="text"], textarea, .form-control {
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  padding: 0.8rem;
+  transition: border-color 0.3s;
+  background-color: #fcfcfc;
+}
+
+input[type="text"]:focus, textarea:focus, .form-control:focus {
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 4px rgba(229, 81, 55, 0.15);
+  outline: none;
+}
+
+/* --- Buttons --- */
+button.btn-primary, .btn-primary {
+  background-color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  border-radius: 50px;
+  padding: 0.6rem 2rem;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+button.btn-primary:hover, .btn-primary:hover {
+  background-color: var(--theme-primary-dark);
+  border-color: var(--theme-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(229, 81, 55, 0.4);
+}
+
+.btn-success {
+    border-radius: 50px;
+}
+.btn-info {
+    border-radius: 50px;
+    color: white;
+}
+.btn-secondary {
+    border-radius: 50px;
+}
