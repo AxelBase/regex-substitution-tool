@@ -1,11 +1,10 @@
 <script lang="ts">
   import { base } from '$app/paths';
   import { fly } from 'svelte/transition';
-  import '../app.css'; // Imports the new Salmon/Bubbly theme
+  import '../app.css'; // Salmon/Bubbly theme
   import 'bootstrap/dist/css/bootstrap.min.css';
 
-  const paypalUsername = 'AxelLab427'; // UPDATE THIS LATER
-  const donationAmounts = [1, 3, 5, 10];
+  const currentYear = new Date().getFullYear();
   let isDropdownOpen = false;
 
   function toggleDropdown() {
@@ -30,43 +29,82 @@
       }
     };
   }
-
-  const currentYear = new Date().getFullYear();
 </script>
 
 <div class="d-flex flex-column min-vh-100">
-  
+
   <header class="sticky-top">
     <nav class="navbar-custom">
       <div class="container d-flex align-items-center justify-content-between">
-        
+
         <div class="d-flex align-items-center gap-3">
           <a href="{base}/" aria-label="Home">
             <img src="{base}/AxelLab-Logo.ico" alt="AxelBase Logo" class="navbar-brand-logo" />
           </a>
-          
+
           <a class="navbar-brand-text me-3" href="{base}/">AxelBase</a>
 
-          <div class="bmac-container" use:clickOutside on:click_outside={closeDropdown}>
-            <button class="bmac-button" on:click={toggleDropdown}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z"/>
+          <div class="position-relative bmac-container" use:clickOutside on:click_outside={closeDropdown}>
+            <button
+              class="bmac-button d-flex align-items-center gap-2 shadow-sm"
+              on:click={toggleDropdown}
+              aria-label="Support options"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2,21V19H20V21H2M20,8V5H4V8H20M20,10H4V13C4,14.38 4.5,15.63 5.31,16.58L11.64,19H12.36L18.69,16.58C19.5,15.63 20,14.38 20,13V10M16,2H8V4H16V2Z" />
               </svg>
-              Buy me a coffee
+              <span class="d-none d-sm-inline fw-semibold">Buy me a Coffee</span>
             </button>
 
             {#if isDropdownOpen}
-              <div class="bmac-dropdown" transition:fly={{ y: -10, duration: 250 }}>
-                {#each donationAmounts as amount}
-                  <a 
-                    href="https://paypal.me/{paypalUsername}/{amount}" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    on:click={closeDropdown}
-                  >
-                    ${amount}
-                  </a>
-                {/each}
+              <div
+                class="bmac-dropdown mt-2"
+                transition:fly={{ y: -10, duration: 250 }}
+              >
+                <a
+                  href="https://buymeacoffee.com/axelbase"
+                  target="_blank"
+                  rel="noopener"
+                  on:click={closeDropdown}
+                >
+                  <span class="amount">$3</span> One Coffee
+                </a>
+                <a
+                  href="https://buymeacoffee.com/axelbase"
+                  target="_blank"
+                  rel="noopener"
+                  on:click={closeDropdown}
+                >
+                  <span class="amount">$5</span> Two Coffees
+                </a>
+                <a
+                  href="https://buymeacoffee.com/axelbase"
+                  target="_blank"
+                  rel="noopener"
+                  on:click={closeDropdown}
+                >
+                  <span class="amount">$10</span> Three Coffees
+                </a>
+
+                <a
+                  href="https://buymeacoffee.com/axelbase"
+                  target="_blank"
+                  rel="noopener"
+                  on:click={closeDropdown}
+                  class="custom-amount"
+                >
+                  Custom Amount
+                </a>
+
+                <a
+                  href="bitcoin:bc1q3p0e6vt492m4w4fpz5m2cl4zcfuqqkgaj6myc9?label=AxelBase&message=Buy%20me%20a%20coffee"
+                  target="_blank"
+                  rel="noopener"
+                  on:click={closeDropdown}
+                  class="custom-amount bitcoin-option"
+                >
+                  Buy via Crypto (Bitcoin)
+                </a>
               </div>
             {/if}
           </div>
@@ -80,7 +118,13 @@
           <li><a class="nav-link-custom" href="{base}/blog">Blog</a></li>
         </ul>
 
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileNav"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
       </div>
@@ -105,7 +149,7 @@
 
   <footer class="footer-custom text-center">
     <div class="container">
-      <p class="mb-2">&copy; {currentYear} AxelBase Regex Substitution</p>
+      <p class="mb-2">© {currentYear} AxelBase Regex Substitution</p>
       <div>
         <a href="{base}/privacy" class="footer-link">Privacy Policy</a>
         <span class="text-white-50">|</span>
@@ -117,12 +161,81 @@
 </div>
 
 <style>
-  /* Simple animation for page load */
-  .fade-in-up {
-    animation: fadeInUp 0.5s ease-out;
+  /* Keeping most of the original File 2 app.css styles */
+  /* Only overriding/enhancing BMAC related parts */
+
+  .bmac-button {
+    background: white;
+    color: var(--theme-primary);
+    border: none;
+    padding: 0.6rem 1.3rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
   }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+
+  .bmac-button:hover {
+    background: #fff8f5;
+    color: var(--theme-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(229,81,55,0.25);
+  }
+
+  .bmac-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(229, 81, 55, 0.18);
+    overflow: hidden;
+    border: 1px solid rgba(229, 81, 55, 0.12);
+    z-index: 1000;
+    padding: 0.5rem 0;
+  }
+
+  .bmac-dropdown a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.98rem;
+    transition: all 0.2s ease;
+  }
+
+  .bmac-dropdown a:hover {
+    background: var(--off-white);
+    color: var(--theme-primary);
+    padding-left: 28px;
+  }
+
+  .bmac-dropdown .amount {
+    font-weight: 700;
+    color: var(--theme-primary);
+    font-size: 1.1rem;
+  }
+
+  .bmac-dropdown .custom-amount {
+    font-weight: 600;
+    color: var(--theme-primary);
+    border-top: 1px solid #eee;
+    justify-content: center !important;
+    padding: 14px 20px;
+  }
+
+  .bitcoin-option {
+    color: #f7931a !important;
+    font-weight: 700 !important;
+  }
+
+  .bitcoin-option:hover {
+    background: #fff5e6 !important;
+    color: #e67e22 !important;
   }
 </style>

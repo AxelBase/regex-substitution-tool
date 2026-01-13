@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://axelbase.github.io/regex-substitution-tool/sitemap.xml
+Sitemap: https://regex-substitution-tool.vercel.app/sitemap.xml
